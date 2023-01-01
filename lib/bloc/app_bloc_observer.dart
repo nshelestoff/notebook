@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:l/l.dart';
 import 'package:meta/meta.dart';
 
+import '../model/error_util.dart';
+
 @sealed
 class AppBlocObserver extends BlocObserver {
   factory AppBlocObserver.instance() => _singleton ??= AppBlocObserver._();
@@ -37,11 +39,11 @@ class AppBlocObserver extends BlocObserver {
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
     l.e(error, stackTrace);
-    // ErrorUtil.logError(
-    //   error,
-    //   stackTrace: stackTrace,
-    //   hint: 'BLoC: ${bloc.runtimeType.toString()}',
-    // );
+    ErrorUtil.logError(
+      error,
+      stackTrace: stackTrace,
+      hint: 'BLoC: ${bloc.runtimeType.toString()}',
+    );
   }
 
   @override
